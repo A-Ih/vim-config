@@ -1,3 +1,4 @@
+" TODO: ycm
 set foldenable
 set foldmethod=manual
 
@@ -18,7 +19,7 @@ augroup ftype_group
     autocmd FileType vim setlocal foldmethod=marker
     autocmd FileType cpp,c,h,hpp setlocal ts=2 sts=2 sw=2 foldenable foldmethod=syntax
     autocmd FileType java,hs,js,tex,latex setlocal foldenable foldmethod=syntax
-    autocmd FileType txt,text,tex,latex setlocal spell spelllang=ru,en
+    autocmd FileType txt,text,tex,latex setlocal spell spelllang=ru,en complete=".,w,b,u,t,i,kspell"
 augroup END
 " }}}
 
@@ -56,8 +57,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'ErichDonGubler/vim-sublime-monokai'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
-" Plug 'zhou13/vim-easyescape' might not be that necessary
-" Plug 'psliwka/vim-smoothie' a regular scrollbar in gvim is better
 call plug#end()
 
 """""""""""""""
@@ -95,8 +94,8 @@ endif
 " {{{ "
 let g:UltiSnipsExpandTrigger="<Tab>"
 let g:UltiSnipsListSnippets="<c-Tab>"
-let g:UltiSnipsJumpForwardTrigger="<Tab>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " }}} "
 """"""""""""""""
 "  ArgTextObj  "
@@ -118,7 +117,8 @@ let g:Powerline_symbols='unicode'
 "  fzf.vim  "
 """""""""""""
 " {{{
-nnoremap <silent> ,f :Files<CR>
+" I rarely use it
+" nnoremap <silent> ,f :Files<CR>
 nnoremap <silent> ,h :Helptags<CR>
 nnoremap <silent> ,b :Buffers<CR>
 nnoremap <silent> ,s :Snippets<CR>
@@ -133,7 +133,6 @@ let g:floaterm_position='bottom'
 let g:floaterm_width=1.0
 let g:floaterm_autoclose=2
 let g:floaterm_keymap_toggle = ',tt'
-nnoremap ,td :FloatermSend cd %:p:h<CR>
 " }}}
 """""""""""""""""
 "  VimStartify  "
@@ -148,6 +147,7 @@ let g:startify_bookmarks = [ '~/.vimrc', '~/.vim', '~/term-5', '~/term-4',
 """"""""""""""
 " {{{
 set autochdir
+let NERDTreeHijackNetrw=0
 let NERDTreeChDirMode=2
 nnoremap <silent> <F1> :NERDTreeToggle<CR>
 " }}}
@@ -155,7 +155,6 @@ nnoremap <silent> <F1> :NERDTreeToggle<CR>
 "  EasyEscape  "
 """"""""""""""""
 " {{{
-" I used to use EasyEscape, but now the vanilla mappings are okay for me
 inoremap jk <ESC>
 inoremap kj <ESC>
 cnoremap jk <ESC>
@@ -236,11 +235,17 @@ nnoremap <space>; <C-w>l
 inoremap <m-o> <esc>o
 inoremap <m-щ> <esc>o
 
+" Not used
 " move lines up/down and preserve the correct indentation
-inoremap <C-k> <esc>:move .+1<CR>==
-inoremap <C-l> <esc>:move .-2<CR>==
+" inoremap <C-k> <esc>:move .+1<CR>==
+" inoremap <C-l> <esc>:move .-2<CR>==
+" vnoremap K :move '>+1<CR>gv=gv
+" vnoremap L :move '<-2<CR>gv=gv
+" no mapping for normal mode, use the visual mappings insted
 " :move is an interesting command btw, gotta use it a bit more
 " the change.txt help file is in itself a very interesting thing
+
+nnoremap Y v$y
 
 "}}}
 """""""""""""
@@ -249,6 +254,16 @@ inoremap <C-l> <esc>:move .-2<CR>==
 " highlight trailing spaces and TODOs:
 match Error /\v\s+$/
 2match Underlined /\vTODO[^.]*/
+
+set wildmenu
+
+" netrw
+let g:netrw_liststyle=3
+let g:netrw_banner=0
+let g:netrw_winsize = 25
+
+" completion & tags
+set omnifunc=syntaxcomplete#Complete
 
 """"""""""""
 "  Themes  "

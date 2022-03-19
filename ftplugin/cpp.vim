@@ -7,6 +7,8 @@ nnoremap <buffer><F7> :!python3 ~/scripts/test.py %<CR>
 " TODO: don't make the python compile the code. I might just need to launch
 " tests separately
 
+set path+=/usr/include/c++/11
+
 """""""""""""""
 "  Vim-CMake  "
 """""""""""""""
@@ -26,3 +28,4 @@ let g:cmake_generate_options = ['-G Ninja', '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON'
 let g:cmake_link_compile_commands = 1
 let g:cmake_root_markers = ['.git', '.svn', '.clang-format', '.clang-tidy', '.ccls', '.root']
 
+autocmd! User CMakeBuildSucceeded CMakeClose
