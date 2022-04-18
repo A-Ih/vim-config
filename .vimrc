@@ -1,3 +1,5 @@
+set backspace=2
+
 " TODO: ycm
 set foldenable
 set foldmethod=manual
@@ -117,13 +119,13 @@ let g:Powerline_symbols='unicode'
 "  fzf.vim  "
 """""""""""""
 " {{{
-" I rarely use it
-" nnoremap <silent> ,f :Files<CR>
+nnoremap <silent> ,f :Files<CR>
 nnoremap <silent> ,h :Helptags<CR>
 nnoremap <silent> ,b :Buffers<CR>
 nnoremap <silent> ,s :Snippets<CR>
 nnoremap <silent> ,c :Commands<CR>
 nnoremap <silent> ,l :Lines<CR>
+
 " }}}
 """"""""""""""
 "  Floaterm  "
